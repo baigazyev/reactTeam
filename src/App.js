@@ -1,4 +1,3 @@
-// App.js
 import React from 'react';
 import { Layout } from 'antd';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -6,10 +5,11 @@ import Feed from './components/Feed';
 import Profile from './components/Profile';
 import Login from './components/Login';
 import Leaderboard from './components/Leaderboard';
-import AddHabit from './components/AddHabit';
+import Habit from './components/Habit';
 import Register from './components/Register';
 import { UserProvider } from './components/UserContext';
 import Header from './components/Header';
+import UserPage from './components/UserPage';
 const { Content, Footer } = Layout;
 
 const AppContent = () => {
@@ -24,8 +24,9 @@ const AppContent = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
-            <Route path="/add-habit" element={<AddHabit />} />
+            <Route path="/habits" element={<Habit />} />
             <Route path="/" element={<Login />} />
+            <Route path="/users/:id" element={<UserPage />} />          
           </Routes>
         </div>
       </Content>

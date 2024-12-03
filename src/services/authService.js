@@ -1,36 +1,42 @@
-const getUsersFromLocalStorage = () => {
-    const users = localStorage.getItem('users');
-    return users ? JSON.parse(users) : [];  
+  export const getAllUsers = async () => {
+    const response = await fetch('http://localhost:5000/users')
+    const data = await response.json()
+    return data
   };
   
-  const saveUsersToLocalStorage = (users) => {
-    localStorage.setItem('users', JSON.stringify(users));
-  };
-  
-  export const getAllUsers = () => {
-    return getUsersFromLocalStorage();
-  };
-  
-  export const registerUser = (userData) => {
-    const users = getUsersFromLocalStorage();
+  export const registerUser = async (userData) => {
+    const users = await getAllUsers();
     const existingUser = users.find((user) => user.email === userData.email);
+  
     if (existingUser) {
-      return null; 
+      console.error('Пользователь с таким email уже существует');
+      return null;
     }
-    users.push(userData);
-    saveUsersToLocalStorage(users); 
-    return userData;
+  
+    const response = await fetch('http://localhost:5000/users', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(userData),
+    });
+  
+    if (response.ok) {
+      return userData; 
+    }
+    return null;
   };
   
-  export const loginUser = (email, password) => {
-    const users = getUsersFromLocalStorage();
+  
+  export const loginUser = async (email, password) => {
+    const users = await getAllUsers(); 
     const user = users.find((user) => user.email === email && user.password === password);
+  
     if (user) {
       localStorage.setItem('activeUser', JSON.stringify(user));
       return user; 
-    }
-    return null; 
+    }  
+    return null;
   };
+  
   
   export const getActiveUser = () => {
     const activeUser = localStorage.getItem('activeUser');

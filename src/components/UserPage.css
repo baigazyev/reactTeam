@@ -1,0 +1,53 @@
+/* UserPage.css */
+.user-page-container {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  .user-info {
+    margin-bottom: 30px;
+  }
+  
+  .user-info h2 {
+    color: #333;
+    font-size: 24px;
+  }
+  
+  .user-info p {
+    font-size: 16px;
+    color: #666;
+  }
+  
+  .user-habits {
+    margin-top: 20px;
+  }
+  
+  .user-habits h3 {
+    font-size: 20px;
+    color: #333;
+  }
+  
+  .user-habits ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  
+  .user-habits li {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+  }
+  
+  .user-habits li strong {
+    font-weight: bold;
+  }
+  
+  .user-habits li small {
+    color: #888;
+  }
+  

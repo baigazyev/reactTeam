@@ -1,0 +1,55 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "admin",
+      "email": "admin@example.com",
+      "password": "admin123",
+      "role": "admin",
+      "habits": []
+    },
+    {
+      "id": "2",
+      "username": "user1",
+      "email": "user1@example.com",
+      "password": "password123",
+      "role": "user",
+      "habits": [
+        "1",
+        "2"
+      ]
+    },
+    {
+      "id": "6efa",
+      "username": "aza@gmail.com",
+      "email": "aza@gmail.com",
+      "password": "aza@gmail.com",
+      "habits": [
+        "6850"
+      ]
+    }
+  ],
+  "habits": [
+    {
+      "id": "1",
+      "title": "Morning Run",
+      "description": "Run for 30 minutes every morning.",
+      "date": "2024-12-03T12:34:56.789Z",
+      "userId": 2
+    },
+    {
+      "id": "2",
+      "title": "Read Books",
+      "description": "Read one book per month.",
+      "date": "2024-12-03T12:34:56.789Z",
+      "userId": 2
+    },
+    {
+      "id": "6850",
+      "title": "Сдать файнал на 100",
+      "description": "Сдать файнал на 100",
+      "date": "2024-12-03T16:15:29.510Z",
+      "userId": "6efa"
+    }
+  ]
+}

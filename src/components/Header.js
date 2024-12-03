@@ -18,7 +18,7 @@ const Header = () => {
         <Menu.Item key="1"><Link to="/feed">Лента</Link></Menu.Item>
         <Menu.Item key="2"><Link to="/profile">Профиль</Link></Menu.Item>
         <Menu.Item key="3"><Link to="/leaderboard">Рейтинг</Link></Menu.Item>
-        <Menu.Item key="4"><Link to="/add-habit">Добавить привычку</Link></Menu.Item>
+        <Menu.Item key="4"><Link to="/habits">Привычки</Link></Menu.Item>
 
         {user ? (
           <>

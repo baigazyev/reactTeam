@@ -1,19 +1,30 @@
-
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { List, Avatar, Card, Typography } from 'antd';
-import { getAllUsers } from '../services/authService';
+import { getAllUsers, getActiveUser } from '../services/authService';
+import { Link } from 'react-router-dom';
 import './Feed.css';
 
 const { Title } = Typography;
 
 const Feed = () => {
-  const [users, setUsers] = useState(getAllUsers());
-  const [filter, setFilter] = useState('all'); // 'all', 'admin', 'user'
+  const [users, setUsers] = useState([]);
+  const [filter, setFilter] = useState('all');
+  
+  const currentUser = getActiveUser();
 
   const filteredUsers = useMemo(() => {
-    if (filter === 'all') return users;
-    return users.filter(user => user.role === filter);
-  }, [users, filter]);
+    if (filter === 'all') return users.filter(user => user.id !== currentUser.id);
+    return users.filter(user => user.role === filter && user.id !== currentUser.id);
+  }, [users, filter, currentUser]);
+
+  useEffect(() => {
+    const getUsers = async () => {
+      const response = await fetch('http://localhost:5000/users');
+      const data = await response.json();
+      setUsers(data);
+    };
+    getUsers();
+  }, []);
 
   return (
     <div className="feed-container">
@@ -31,16 +42,18 @@ const Feed = () => {
           dataSource={filteredUsers}
           renderItem={(user) => (
             <List.Item key={user.username}>
-              <Card
-                hoverable
-                cover={
-                  <Avatar size={64} style={{ backgroundColor: '#87d068' }}>
-                    {user.username[0]}
-                  </Avatar>
-                }
-              >
-                <List.Item.Meta title={user.username} />
-              </Card>
+              <Link to={`/users/${user.id}`} >
+                <Card
+                  hoverable
+                  cover={
+                    <Avatar size={64} style={{ backgroundColor: '#87d068' }}>
+                      {user.username[0]}
+                    </Avatar>
+                  }
+                >
+                  <List.Item.Meta title={user.username} />
+                </Card>
+              </Link>
             </List.Item>
           )}
         />

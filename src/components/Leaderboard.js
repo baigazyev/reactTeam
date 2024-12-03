@@ -1,20 +1,33 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import { List, Card, Statistic } from 'antd';
-import { getAllUsers } from '../services/authService';
+import { List, Card, Statistic, Spin } from 'antd';
+import { getAllUsers } from '../services/authService'; 
 
 const Leaderboard = () => {
   const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const allUsers = getAllUsers();  
-    if (allUsers) {
-      setUsers(allUsers.filter(user => user.habits && Array.isArray(user.habits)));
-    }
+    const fetchUsers = async () => {
+      try {
+        const allUsers = await getAllUsers();
+        setUsers(allUsers);
+      } catch (error) {
+        console.error('Ошибка при загрузке пользователей:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUsers();
   }, []);
 
   const sortedUsers = useMemo(() => {
     return users.sort((a, b) => b.habits.length - a.habits.length);
-  }, [users]); 
+  }, [users]);
+
+  if (loading) {
+    return <Spin size="large" tip="Загрузка..." />;
+  }
 
   if (!sortedUsers.length) {
     return <p>Нет данных о пользователях.</p>;
